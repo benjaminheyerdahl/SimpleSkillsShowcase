@@ -1,12 +1,11 @@
 ﻿using SimpleSkillsShowcase.Core.Entities;
 using SimpleSkillsShowcase.Core.Implementations;
 using SimpleSkillsShowcase.Core.Interfaces;
-using SimpleSkillsShowcase.Core.ServiceRules;
 using SimpleSkillsShowcase.Core.ServiceRules.Implementations;
 using SimpleSkillsShowcase.Core.ViewModels;
 using Xunit;
 
-namespace SimpleSkillsShowcase.Test.NoteTests
+namespace SimpleSkillsShowcaseTests.NoteTests
 {
     public class NoteServiceTest
     {

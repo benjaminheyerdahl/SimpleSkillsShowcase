@@ -28,12 +28,9 @@ namespace SimpleSkillsShowcase
 
             services.AddSwaggerGen();
 
-            // Register Services
-            services.AddScoped<INoteService, NoteService>();
-            services.AddScoped<INoteServiceRule, NoteServiceRule>();
-
+            RegisterServices(services);
+            
             // Register Data
-
             services.AddDbContext<NoteContext>(options =>
                 options.UseSqlServer("Server=localhost;Initial Catalog=NoteDb;Trusted_Connection=True;"));
         }
@@ -63,6 +60,13 @@ namespace SimpleSkillsShowcase
             {
                 endpoints.MapControllers();
             });
+        }
+
+        public void RegisterServices(IServiceCollection services)
+        {
+            // Register Services
+            services.AddScoped<INoteService, NoteService>();
+            services.AddScoped<INoteServiceRule, NoteServiceRule>();
         }
     }
 }

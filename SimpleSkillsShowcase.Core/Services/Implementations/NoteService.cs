@@ -32,7 +32,8 @@ namespace SimpleSkillsShowcase.Core.Implementations
                 .Select(note => new NoteViewModel
                 {
                     Id = note.Id,
-                    Title = note.Title
+                    Title = note.Title,
+                    Description = note.Description
                 })
                 .FirstOrDefaultAsync();
         }
@@ -47,7 +48,8 @@ namespace SimpleSkillsShowcase.Core.Implementations
                 .Select(note => new NoteViewModel
                 {
                     Id = note.Id,
-                    Title = note.Title
+                    Title = note.Title,
+                    Description = note.Description
                 })
                 .ToListAsync();
         }
@@ -65,16 +67,25 @@ namespace SimpleSkillsShowcase.Core.Implementations
             {
                 var result = _context.Note.Add(new Note
                 {
-                    Title = note.Title
+                    Title = note.Title,
+                    Description = note.Description
                 });
 
-                _context.SaveChanges();
+                if (result.State == EntityState.Added)
+                {
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    // Issue with saving to Db, exists or errors, show here
+                    return false;
+                }
 
                 return true;
             }
             else
             {
-                // Return list of errors here instead, service response model?
+                // Return list of service rule errors here instead, service response model?
                 return false;
             }
 
@@ -95,12 +106,20 @@ namespace SimpleSkillsShowcase.Core.Implementations
                 var result = _context.Note.Update(new Note
                 {
                     Id = note.Id,
-                    Title = note.Title
+                    Title = note.Title,
+                    Description = note.Description
                 });
 
-                _context.SaveChanges();
-
-                return result.Entity;
+                if(result.State == EntityState.Modified)
+                {
+                    _context.SaveChanges();
+                    return result.Entity;
+                }
+                else
+                {
+                    // Issue with updating to Db here, show/log errors here
+                    return null;
+                }
             }
             else
             {

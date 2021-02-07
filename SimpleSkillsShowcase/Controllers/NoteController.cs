@@ -33,7 +33,7 @@ namespace SimpleSkillsShowcase.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("Notes")]
         public async Task<IActionResult> GetAllAsync()
         {
             var result = await _noteService.GetAllAsync();
@@ -63,32 +63,6 @@ namespace SimpleSkillsShowcase.Controllers
                 return BadRequest();
             }
         }
-
-        //[HttpPost]
-        //public IActionResult AddWithFeatures(NoteRequestModel note)
-        //{
-        //    // eventually add validation factory of some sort and/or service factory
-        //    //var errors = _noteValidator.Add(note);
-        //    if (note != null)
-        //    {
-        //        try
-        //        {
-        //            var result = _noteService.Add(note);
-        //            return Ok(result);
-        //        }
-
-        //        catch (Exception e)
-        //        {
-        //            _logger.LogInformation($"Error on Note Add: Input{note}, Error{e}");
-        //            return BadRequest(e);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // with errors
-        //        return BadRequest();
-        //    }
-        //}
 
         [HttpPut]
         public IActionResult Update(NoteRequestModel note)

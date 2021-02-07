@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SimpleSkillsShowcase.Core.Entities;
 using SimpleSkillsShowcase.Core.Interfaces;
 using SimpleSkillsShowcase.Core.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SimpleSkillsShowcase.Controllers
@@ -54,7 +51,6 @@ namespace SimpleSkillsShowcase.Controllers
                     var result = _noteService.Add(note);
                     return Ok(result);
                 }
-
                 catch (Exception e)
                 {
                     _logger.LogInformation($"Error on Note Add: Input{note}, Error{e}");
@@ -67,7 +63,6 @@ namespace SimpleSkillsShowcase.Controllers
                 return BadRequest();
             }
         }
-
 
         //[HttpPost]
         //public IActionResult AddWithFeatures(NoteRequestModel note)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SimpleSkillsShowcase.Core.Entities
+﻿namespace SimpleSkillsShowcase.Core.Entities
 {
     public class Author
     {

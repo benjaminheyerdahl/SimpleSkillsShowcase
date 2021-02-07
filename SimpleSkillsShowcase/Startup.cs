@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using SimpleSkillsShowcase.Core.Entities;
 using SimpleSkillsShowcase.Core.Implementations;
 using SimpleSkillsShowcase.Core.Interfaces;
+using SimpleSkillsShowcase.Core.ServiceRules;
+using SimpleSkillsShowcase.Core.ServiceRules.Implementations;
 
 namespace SimpleSkillsShowcase
 {
@@ -28,6 +30,7 @@ namespace SimpleSkillsShowcase
 
             // Register Services
             services.AddScoped<INoteService, NoteService>();
+            services.AddScoped<INoteServiceRule, NoteServiceRule>();
 
             // Register Data
 

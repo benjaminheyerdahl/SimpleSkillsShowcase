@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimpleSkillsShowcase.Core.Entities;
 using SimpleSkillsShowcase.Core.Interfaces;
+using SimpleSkillsShowcase.Core.ServiceRules;
 using SimpleSkillsShowcase.Core.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace SimpleSkillsShowcase.Core.Implementations
     public class NoteService : INoteService
     {
         private NoteContext _context;
+        private readonly INoteServiceRule _serviceRule;
 
-        public NoteService(NoteContext context)
+        public NoteService(NoteContext context, INoteServiceRule serviceRule)
         {
             _context = context;
+            _serviceRule = serviceRule;
         }
 
         /// <summary>
@@ -43,7 +46,8 @@ namespace SimpleSkillsShowcase.Core.Implementations
             return await _context.Note
                 .Select(note => new NoteViewModel
                 {
-                    Id = note.Id
+                    Id = note.Id,
+                    Title = note.Title
                 })
                 .ToListAsync();
         }
@@ -55,14 +59,25 @@ namespace SimpleSkillsShowcase.Core.Implementations
         /// <returns>Success</returns>
         public bool Add(NoteRequestModel note)
         {
-            var result = _context.Note.Add(new Note
+            var errors = _serviceRule.Add(note);
+
+            if (errors == null)
             {
-                Title = note.Title
-            });
+                var result = _context.Note.Add(new Note
+                {
+                    Title = note.Title
+                });
 
-            _context.SaveChanges();
+                _context.SaveChanges();
 
-            return true;
+                return true;
+            }
+            else
+            {
+                // Return list of errors here instead, service response model?
+                return false;
+            }
+
         }
 
         /// <summary>
@@ -72,14 +87,25 @@ namespace SimpleSkillsShowcase.Core.Implementations
         /// <returns>Updated Note if Success</returns>
         public Note Update(NoteRequestModel note)
         {
-            var result = _context.Note.Update(new Note
+            // Maybe return only changes, depends on web use if they will store values.
+            var errors = _serviceRule.Update(note);
+
+            if (errors == null)
             {
-                Id = note.Id
-            });
+                var result = _context.Note.Update(new Note
+                {
+                    Id = note.Id,
+                    Title = note.Title
+                });
 
-            _context.SaveChanges();
+                _context.SaveChanges();
 
-            return result.Entity;
+                return result.Entity;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -89,14 +115,20 @@ namespace SimpleSkillsShowcase.Core.Implementations
         /// <returns>Success</returns>
         public bool Delete(int id)
         {
-            //var result = _context.Notes.Remove(id);
+            var note = new Note
+            {
+                Id = id
+            };
 
-            //if (result != null)
-            //{
-            //    return false;
-            //}
-            //// number of affected rows/success or not
-            return true;
+            var result = _context.Note.Remove(note);
+
+            if (result.State == EntityState.Deleted)
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            // number of affected rows/success or not
+            return false;
         }
     }
 }

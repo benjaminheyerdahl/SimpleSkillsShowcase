@@ -23,6 +23,11 @@ namespace SimpleSkillsShowcase.Controllers
             _noteService = noteService;
         }
 
+        /// <summary>
+        /// Get Note by Id
+        /// </summary>
+        /// <param name="id">Note Id</param>
+        /// <returns>Note View Model</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {

@@ -1,29 +1,32 @@
-# Foobar
+# Skills Showcase
 
-Foobar is a Python library for dealing with word pluralization.
-
+This project is a continuously improving and expanding showcase of most of the skills I have learned and utilized. Anything you would like to see me do or learn? Just send me a message and I will add your request in the future!
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Tools/Technologies Needed/Used
 
-```bash
-pip install foobar
+.NET 5.0\
+SQL Server\
+Entity Framework\
+xUnit/nUnit with Moq
+
+DDL/Scripts will be included for seeding a new NoteDb.\
+Should be able to clone and run as-is (generic AppSettings used)
+
+Run tests to verify functionality without needing external configuration
+
+```c#
+c# code here if needed
 ```
 
 ## Usage
 
-```python
-import foobar
+```c#
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
 ```
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+Let me know if there is something you'd like me to showcase or think I should learn!
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[Example](www.google.com)

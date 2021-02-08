@@ -41,7 +41,7 @@ Supporting Frameworks:
 - Working with IO/physical device
 - IOT
 - AI
-- 
+- More commenting/documentation, comment to show what I could/would do in situations.
 
 ## Installation
 

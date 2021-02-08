@@ -42,6 +42,7 @@ Supporting Frameworks:
 - IOT
 - AI
 - More commenting/documentation, comment to show what I could/would do in situations.
+- Flesh out DB objects a little more to showcase relational abilities, eg. Authors for a Note
 
 ## Installation
 
